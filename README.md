@@ -6,9 +6,14 @@ This is the final project for CSC230 at SFSU.
 Please ensure the below packages are installed on your
 system before running the project:
 
-* Node (v22.13.1)
+* Node (v16.x)
 * NPM (10.9.2)
 * SQLite3 (3.49.1)
+
+### Local Development
+1. Copy `.env.example` to `.env`
+2. Replace local variables
+3. Let's party 🎉
 
 ### Starting the Application
 1. Run `npm install` from `<project_root>`
