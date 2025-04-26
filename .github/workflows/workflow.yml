@@ -11,6 +11,6 @@ jobs:
     steps:
       - uses: lonnen/sync-branch-to-glitch-action@v0.0.4
         env:
-          GLITCH_GIT_URL: ${{ secrets.GlitchGitURL }}
+          GLITCH_GIT_URL: ${{ secrets.GLITCH_GIT_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_BRANCH: 'main'
