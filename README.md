@@ -28,6 +28,9 @@ system before running the project:
 2. Configure the following `secrets` in Github:
 
 ```
-GlitchGitURL # URL to Glitch deployment
+GlitchGitURL # URL to Glitch git deployment
 GITHUB_TOKEN # Personal token generated from Github settings
 ```
+
+### Troubleshooting
+* Ensure you are using [Glitch git url](https://github.com/marketplace/actions/sync-a-repo-branch-to-a-glitch-project-repo#usage) **NOT** the public-facing URL
