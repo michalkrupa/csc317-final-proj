@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
 
-/* GET search result listing. */
-router.get('/', function(req, res, next) {
-  res.render('search', { title: 'Search' });
-});
+function createSearchRouter(db) {
+  const router = express.Router();
+  /* GET search result listing. */
+  router.get('/', function(req, res, next) {
+    res.render('search', { title: 'Search' });
+  });
 
-module.exports = router;
+  return router;
+}
+
+
+module.exports = {
+  createSearchRouter: createSearchRouter,
+};

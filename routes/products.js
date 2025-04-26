@@ -1,10 +1,10 @@
 const express = require('express');
 
-function createUsersRouter(db) {
+function createProductsRouter(db) {
     const router = express.Router();
 
     router.get('/', (req, res) => {
-        db.all('SELECT * FROM users', [], (err, rows) => {
+        db.all('SELECT * FROM products', [], (err, rows) => {
             if (err) {
                 console.error(err);
                 res.status(500).send('Database error');
@@ -18,5 +18,5 @@ function createUsersRouter(db) {
 }
 
 module.exports = {
-  createUsersRouter: createUsersRouter,
-}
+    createProductsRouter,
+};
