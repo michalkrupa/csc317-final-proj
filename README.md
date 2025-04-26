@@ -1,7 +1,7 @@
 # Overview
 This is the final project for CSC230 at SFSU.
 
-[Deployment URL](https://future-panoramic-shawl.glitch.me/)
+[Deployment URL](https://curved-alike-sphere.glitch.me/)
 
 ## Getting Started
 ### Installing Dependencies
