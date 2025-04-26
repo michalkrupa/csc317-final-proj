@@ -22,3 +22,12 @@ system before running the project:
 
 ### Initializing the DB
 1. Run `sqlite3 db-[env].db` 
+
+### Deployment
+1. Import repo to [Glitch](https://glitch.me/)
+2. Configure the following `secrets` in Github:
+
+```
+GlitchGitURL # URL to Glitch deployment
+GITHUB_TOKEN # Personal token generated from Github settings
+```
