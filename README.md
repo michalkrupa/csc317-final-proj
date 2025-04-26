@@ -29,7 +29,6 @@ system before running the project:
 
 ```
 GlitchGitURL # URL to Glitch git deployment
-GITHUB_TOKEN # Personal token generated from Github settings
 ```
 
 ### Troubleshooting
