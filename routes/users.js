@@ -52,7 +52,16 @@ function createUsersRouter(db) {
                         res.status(500).send('Database error');
                     }
                 } else {
-                    res.send('Registration successful! <a href="/users/login">Login here</a>');
+                    const userId = this.lastID;
+
+                    // 2. Automatically create a wishlist for the new user
+                    db.run('INSERT INTO wishlist (user_id) VALUES (?)', [userId], function (wishlistErr) {
+                        if (wishlistErr) {
+                            console.error(wishlistErr);
+                            return res.status(500).send('Database error during wishlist creation');
+                        }
+                        res.send('Registration successful! <a href="/users/login">Login here</a>');
+                    });
                 }
             }
         );
@@ -107,6 +116,77 @@ function createUsersRouter(db) {
             }
             res.send('Logged out. <a href="/users/login">Login again</a>');
         });
+    });
+
+
+    // View Profile
+    router.get('/profile', (req, res) => {
+        const userId = req.session.userId;
+        if (!userId) return res.status(401).send('You must be logged in.');
+
+        db.get('SELECT username, email, phone FROM users WHERE id = ?', [userId], (err, user) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).send('Database error');
+            }
+            if (!user) return res.status(404).send('User not found');
+
+            res.send(`
+                <h1>Your Profile</h1>
+                <p><strong>Username:</strong> ${user.username}</p>
+                <form method="POST" action="/users/profile/update">
+                    <input name="email" value="${user.email}" placeholder="Email" required />
+                    <input name="phone" value="${user.phone || ''}" placeholder="Phone Number" />
+                    <input name="password" type="password" placeholder="New Password (optional)" />
+                    <button type="submit">Update Profile</button>
+                </form>
+                <p><a href="/users/logout">Logout</a></p>
+            `);
+        });
+    });
+
+    // Handle Profile Update
+    router.post('/profile/update', (req, res) => {
+        const userId = req.session.userId;
+        if (!userId) return res.status(401).send('You must be logged in.');
+
+        const { email, phone, password } = req.body;
+
+        if (!email) return res.status(400).send('Email is required');
+
+        const updates = [];
+        const params = [];
+
+        updates.push('email = ?');
+        params.push(email);
+
+        if (phone !== undefined) {
+            updates.push('phone = ?');
+            params.push(phone);
+        }
+
+        if (password) {
+            const hashedPassword = bcrypt.hashSync(password, 10);
+            updates.push('password = ?');
+            params.push(hashedPassword);
+        }
+
+        params.push(userId);
+
+        db.run(
+            `UPDATE users SET ${updates.join(', ')} WHERE id = ?`,
+            params,
+            function (err) {
+                if (err) {
+                    console.error(err);
+                    if (err.message.includes('UNIQUE')) {
+                        return res.status(400).send('Email already in use');
+                    }
+                    return res.status(500).send('Database error');
+                }
+                res.send('Profile updated successfully! <a href="/users/profile">Back to profile</a>');
+            }
+        );
     });
 
     return router;

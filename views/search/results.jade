@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  h1= title
+
+  if query
+    p Showing results for "#{query}"
+
+  if sort
+    p Sorted by "#{sort}"
+
+  if results.length
+    ul
+      each product in results
+        li
+          strong #{product.name}
+          |  - $#{product.price.toFixed(2)}
+          if product.is_sale
+            |  (On Sale!)
+  else
+    p No products found.

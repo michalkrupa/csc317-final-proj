@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  h1= title
+  form(method="GET", action="/search/results")
+    input(type="text", name="q", placeholder="Search products...")
+    br
+    label(for="sort") Sort by:
+    select(name="sort")
+      option(value="name_asc") Name (A-Z)
+      option(value="name_desc") Name (Z-A)
+      option(value="price_asc") Price (Low to High)
+      option(value="price_desc") Price (High to Low)
+      option(value="sale") On Sale
+    br
+    button(type="submit") Search

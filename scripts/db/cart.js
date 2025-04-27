@@ -6,7 +6,8 @@ const createCart = async (db) => {
             db,
             `CREATE TABLE IF NOT EXISTS cart (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER NOT NULL,
+                user_id INTEGER, -- NULLABLE for guests
+                session_id TEXT, -- NEW: for unauthenticated users
                 product_id INTEGER NOT NULL,
                 product_name TEXT NOT NULL,
                 quantity INTEGER NOT NULL DEFAULT 1,
@@ -17,6 +18,8 @@ const createCart = async (db) => {
         );
     } catch (error) {
         console.log(error);
+    } finally {
+        console.log('Checkout cart table created.');
     }
 }
 
