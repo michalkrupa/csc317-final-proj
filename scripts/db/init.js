@@ -1,7 +1,8 @@
 const sqlite3 = require('sqlite3');
+const { createCart } = require('./cart');
 const { createProducts } = require('./products');
 const { createOrders } = require('./orders');
-const { createUsers } = require('./users');
+const { createUsers, ensurePasswordColumn } = require('./users');
 
 const openDb = () => {
     const DB_NAME = `${process.env.DATABASE_NAME || 'animals'}.db`;
@@ -31,6 +32,10 @@ const setupDb = async (db) => {
 
         await createUsers(db);
         console.log('Users table created.');
+        await ensurePasswordColumn(db); // Make sure password column exists
+
+        await createCart(db);
+        console.log('Checkout cart table created.');
     } catch (error) {
         console.error('Error setting up database:', error.message);
     }
