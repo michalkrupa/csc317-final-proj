@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const productList = document.getElementById("product-list");
 
-  fetch("/api/products")
+  fetch("/products")
     .then((response) => response.json())
     .then((products) => {
       products.forEach((product) => {
