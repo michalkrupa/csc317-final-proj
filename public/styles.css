@@ -1,0 +1,201 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to top, lightblue, rgb(246, 246, 246));
+  background-size: cover;
+}
+
+nav {
+  display: flex;
+  position: sticky;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, lightblue, rgb(246, 246, 246));
+  border-bottom: 1px solid lightblue;
+  padding: 10px;
+  z-index: 1000;
+}
+
+nav .logo img {
+  width: 120px;
+  padding: 5px;
+  margin-left: 50px;
+  cursor: pointer;
+}
+
+nav .menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+nav .menu li {
+  position: relative;
+  margin: 0 15px;
+}
+
+nav .menu a {
+  color: black;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+nav .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: linear-gradient(to right, lightblue, rgb(246, 246, 246));
+  border-radius: 10px;
+  padding: 10px 0;
+  width: 200px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+nav .dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+}
+
+nav .actions {
+  display: flex;
+  align-items: center;
+}
+
+nav .search-bar {
+  padding: 10px 30px 10px 10px;
+  margin-right: 5px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+nav .search-bar:hover {
+  border: 1px solid lightblue;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+nav .search-container {
+  position: relative;
+}
+
+nav .search-icon {
+  position: absolute;
+  margin-left: 20px;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  fill: #ffffff;
+  cursor: pointer;
+}
+
+nav .signin-btn,
+nav .cart-btn {
+  background-color: lightblue;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav .signin-btn i,
+nav .cart-btn i {
+  margin-right: 10px;
+}
+
+nav .signin-btn:hover,
+nav .cart-btn:hover {
+  background-color: #a8d5f2;
+}
+
+footer {
+  background: linear-gradient(to top, lightblue, rgb(246, 246, 246));
+  text-align: center;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+  margin: 0;
+  font-size: 14px;
+  color: black;
+}
+
+
+/* Product Grid Styles */
+
+
+h1 {
+  text-align: center;
+  margin: 2rem 0 1rem;
+  font-size: 2rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  padding: 0 2rem 4rem;
+  max-width: 1200px;
+  margin: auto;
+  list-style: none;
+}
+
+.product-item {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.product-item:hover {
+  transform: translateY(-4px);
+}
+
+.product-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.product-item h3 {
+  font-size: 1.2rem;
+  margin: 0.5rem 1rem 0;
+}
+
+.product-item p {
+  font-size: 0.95rem;
+  margin: 0.5rem 1rem;
+  color: #555;
+}
+
+.product-item span {
+  display: block;
+  font-weight: bold;
+  margin: 0.5rem 1rem 1rem;
+  color: #0077cc;
+}
