@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const html2pug = require('html2pug');
 
-const inputDir = './html-files'; // Root directory to scan
+const inputDir = '../../public'; // Root directory to scan
 
 function walkAndConvert(currentDir) {
   const entries = fs.readdirSync(currentDir, { withFileTypes: true });
@@ -14,7 +14,7 @@ function walkAndConvert(currentDir) {
       walkAndConvert(fullPath); // Recurse into subdirectory
     } else if (entry.isFile() && path.extname(entry.name).toLowerCase() === '.html') {
       const fileName = path.basename(entry.name, '.html');
-      const pugPath = path.join(currentDir, `${fileName}.pug`);
+      const pugPath = path.join(currentDir, `${fileName}.jade`);
 
       try {
         const html = fs.readFileSync(fullPath, 'utf8');
