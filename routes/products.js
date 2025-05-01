@@ -33,7 +33,7 @@ function createProductsRouter(db) {
                 console.error(err);
                 res.status(500).send('Database error fetching products');
             } else {
-                res.json(rows);
+                res.render('products', { products: rows });
             }
         });
     });

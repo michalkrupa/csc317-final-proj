@@ -52,6 +52,8 @@ app.use(express.urlencoded({ extended: true }));
 // register cookie middleware
 app.use(cookieParser());
 
+//mount static dir
+app.use(express.static(path.join(__dirname, 'public')));
 
 //register all routers
 createRouters(app, db);
@@ -60,9 +62,6 @@ createRouters(app, db);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
-//mount static dir
-app.use(express.static(path.join(__dirname, 'public')));
 
 // error handler
 app.use(function(err, req, res, next) {

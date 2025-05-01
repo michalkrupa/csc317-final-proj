@@ -43,7 +43,7 @@ function createSearchRouter(db) {
 
           res.render('search/results', {
               title: 'Search Results',
-              results: rows,
+              products: rows,
               query: q,
               sort: sort
           });
