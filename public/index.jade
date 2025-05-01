@@ -1,0 +1,70 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='UTF-8')
+		meta(name='viewport', content='width=device-width,initial-scale=1')
+		title MassoumyGems
+		link(rel='stylesheet', href='styles.css')
+		link(href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap', rel='stylesheet')
+		link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css')
+	body
+		nav
+			.logo(onclick='location.href=\'/index.html\';')
+				img(src='/images/logo.png', alt='Massoumy Gems logo', onerror='this.onerror=null; this.src=\'https://via.placeholder.com/150\';', loading='lazy')
+			ul.menu
+				li.dropdown
+					a(href='/shop/shop.html') Shop
+					.dropdown-content
+						.menu-row
+							a(href='/shop/shop.html#crystals') Crystals
+						.menu-row
+							a(href='/shop/shop.html#jewelry') Jewelry
+				li.dropdown
+					a(href='#services') Services
+					.dropdown-content
+						.menu-row
+							a(href='#') Custom Gem Cutting
+						.menu-row
+							a(href='#') Custom Jewelry Design
+				li.dropdown
+					a(href='#learnings') Learnings
+					.dropdown-content
+						.menu-row
+							a(href='#') Gem Education
+						.menu-row
+							a(href='#') Healing Properties
+				li.dropdown
+					a(href='#events') Events
+					.dropdown-content
+						.menu-row
+							a(href='#') Upcoming Shows
+						.menu-row
+							a(href='#') Past Events
+				li
+					a(href='#about') About
+			.actions
+				.search-container
+					input.search-bar(type='text', placeholder='Search...')
+					svg.search-icon(xmlns='http://www.w3.org/2000/svg', fill='none', viewBox='0 0 24 24', stroke-width='1.5', stroke='currentColor')
+						path(stroke-linecap='round', stroke-linejoin='round', d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z')
+				button.signin-btn(onclick='location.href=\'/login/login.html\';') Sign In
+				button.cart-btn
+					i.fas.fa-shopping-cart
+		//  Main Content 
+		main
+			section
+				h1 Welcome to MassoumyGems
+				p Discover handcrafted jewelry, polished stones, crystals, and more.
+				a(href='/profile/profile.html') Go to Profile
+			//  Product List (loaded from script.js) 
+			ul#product-list.product-grid
+		//  Footer 
+		footer
+			.footer-content
+				.footer-section.about
+					h3 About MassoumyGems
+					p Your one-stop shop for crystals, jewelry, and holistic products. We believe in the beauty of natural stones and the energy they bring into your life.
+			.footer-bottom
+				p © 2025 MassoumyGems. All rights reserved.
+		//  Scripts 
+		script(src='script.js', defer)
