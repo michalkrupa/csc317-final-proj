@@ -9,9 +9,9 @@ block content
   if sort
     p Sorted by "#{sort}"
 
-  if results.length
+  if products.length
     ul
-      each product in results
+      each product in products
         li
           strong #{product.name}
           |  - $#{product.price.toFixed(2)}
