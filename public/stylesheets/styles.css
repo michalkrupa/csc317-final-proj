@@ -10,12 +10,14 @@ body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(to top, lightblue, rgb(246, 246, 246));
   background-size: cover;
+  padding-top: 200px;
 }
 
 nav {
   display: flex;
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(to right, lightblue, rgb(246, 246, 246));
