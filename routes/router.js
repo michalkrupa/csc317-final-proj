@@ -9,6 +9,7 @@ const { createServicesRouter } = require('./services');
 const { createWishlistsRouter } = require('./wishlists');
 const { createCartRouter } = require('./cart');
 const { createAboutRouter } = require('./about');
+const { createFaqRouter } = require('./faq');
 
 function createRouters(app, db) {
     const indexRouter = createIndexRouter(db);
@@ -22,6 +23,7 @@ function createRouters(app, db) {
     const wishlistsRouter = createWishlistsRouter(db);
     const cartRouter = createCartRouter(db);
     const aboutRouter = createAboutRouter(db);
+    const faqRouter = createFaqRouter(db);
 
     app.use('/', indexRouter);
     app.use('/newsletter', newsletterRouter);
@@ -34,6 +36,7 @@ function createRouters(app, db) {
     app.use('/wishlists', wishlistsRouter);
     app.use('/cart', cartRouter);
     app.use('/about', aboutRouter);
+    app.use('/faq', faqRouter);
 
     return app;
 }
