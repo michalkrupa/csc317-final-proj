@@ -4,7 +4,7 @@ fetch('/api/products')
   .then(res => res.json())
   .then(products => {
     products.forEach((product, index) => {
-      const productId = index + 1; // For linking to product1.html, etc.
+      const productId = index + 1; // For linking to product1.html
       const li = document.createElement('li');
       li.classList.add('product-item');
       li.innerHTML = `
