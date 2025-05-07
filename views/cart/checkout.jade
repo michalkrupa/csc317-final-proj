@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  h1= title
+
+  if cartItems.length
+    ul
+      each item in cartItems
+        li
+          | #{item.product_name} - $#{item.price_per_unit.toFixed(2)} x #{item.quantity}
+
+    hr
+    p Subtotal: $#{subtotal}
+    p Tax (CA 7.25%): $#{tax}
+    p Delivery Fee: $#{deliveryFee}
+    h3 Total: $#{total}
+
+    form(method="POST", action="/cart/checkout/submit")
+      button(type="submit") Place Order
+  else
+    p Your cart is empty.

@@ -1,0 +1,15 @@
+{
+  "name": "convert",
+  "version": "1.0.0",
+  "main": "html2pug.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "html2pug": "^4.0.0"
+  }
+}

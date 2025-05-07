@@ -1,0 +1,14 @@
+extends ../layout
+
+block content 
+    h1 Our Collections
+    ul.product-grid#product-list
+        -for product in products
+            li
+                .product-details
+                    h1 #{product.name}
+                    img.product-image(src='/images/#{product.image}', alt='#{product.name} image')
+                    p #{product.description}
+                    p Price: #{product.price}
+        
+        a.btn.back-to-shop(href='/products') Back to Shop
