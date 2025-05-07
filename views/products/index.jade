@@ -4,11 +4,13 @@ block content
     h1 Our Collections
     ul.product-grid#product-list
         -for product in products
-            li
-                .product-details
-                    h1 #{product.name}
-                    img.product-image(src='/images/#{product.image}', alt='#{product.name} image')
+            li.product-item
+                a(href="/products/#{product.id}" aria-label="View details for #{product.name}")
+                    img(src="/images/#{product.image}" alt="#{product.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/200x200';")
+                    h3 #{product.name}
                     p #{product.description}
-                    p Price: #{product.price}
+                    span #{product.price.toFixed(2)}
+                a(href="/cart/add/#{product.id}")
+                    button.add-to-cart-btn Add to Cart
         
         a.btn.back-to-shop(href='/products') Back to Shop
