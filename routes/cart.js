@@ -4,6 +4,32 @@ function createCartRouter(db) {
     const router = express.Router();
 
     // Add item to cart
+    router.get('/add/:product_id', (req, res) => {
+        const { product_id } = req.params;
+        const { product_name, price_per_unit, quantity } = req.body;
+
+        if (!product_id || !product_name || !price_per_unit) {
+            return res.status(400).send('Product info required');
+        }
+
+        const userId = req.session.userId || null; // if user logged in
+        const sessionId = req.session.id; // express-session session ID
+
+        db.run(
+            `INSERT INTO cart (user_id, session_id, product_id, product_name, quantity, price_per_unit)
+             VALUES (?, ?, ?, ?, ?, ?)`,
+            [userId, sessionId, product_id, product_name, quantity || 1, price_per_unit],
+            function (err) {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).send('Database error');
+                }
+                res.redirect('/products/')
+            }
+        );
+    });
+
+    // Add item to cart
     router.post('/add', (req, res) => {
         const { product_id, product_name, price_per_unit, quantity } = req.body;
 
