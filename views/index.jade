@@ -1,7 +1,29 @@
 extends layout 
 
 block content
-	h1 Welcome to MassoumyGems
-	p Discover handcrafted jewelry, polished stones, crystals, and more.
-	a(href='/users/profile') Go to Profile
-	ul#product-list.product-grid
+    h1 Welcome to MassoumyGems
+    p Discover handcrafted jewelry, polished stones, crystals, and more.
+    a(href='/users/profile') Go to Profile
+    h2 Featured Products
+    ul.product-grid#product-list
+        -for product in featured_products
+            li.product-item
+                a(href="/products/#{product.id}" aria-label="View details for #{product.name}")
+                    img(src="/images/#{product.image}" alt="#{product.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/200x200';")
+                    h3 #{product.name}
+                    p #{product.description}
+                    span #{product.price.toFixed(2)}
+                a(href="/cart/add/#{product.id}")
+                    button.add-to-cart-btn Add to Cart
+    h2 Shop Spring Sale
+    ul.product-grid#product-list
+        -for product in sale_products
+            li.product-item
+                a(href="/products/#{product.id}" aria-label="View details for #{product.name}")
+                    img(src="/images/#{product.image}" alt="#{product.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/200x200';")
+                    h3 #{product.name}
+                    p #{product.description}
+                    span #{product.price.toFixed(2)}
+                a(href="/cart/add/#{product.id}")
+                    button.add-to-cart-btn Add to Cart
+    a.btn.back-to-shop(href='/products') All Our Products

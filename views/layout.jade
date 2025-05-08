@@ -18,23 +18,23 @@ html
               a(href='/products') Shop
               .dropdown-content
                 .menu-row
-                  a(href='/products#crystals') Crystals
+                  a(href='/products/crystals') Crystals
                 .menu-row
-                  a(href='/products#jewelry') Jewelry
+                  a(href='/products/jewelry') Jewelry
             li.dropdown
               a(href='/services') Services
               .dropdown-content
                 .menu-row
-                  a(href='/services/gem-cutting') Custom Gem Cutting
+                  a(class="menu-row" href='/services/custom') Gem Cutting
                 .menu-row
-                  a(href='/services/custom') Custom Jewelry Design
+                  a(href='/services/design') Jewelry Design
             li.dropdown
-              a(href='/learnings') Learnings
+              a(href='/learning') Learning
               .dropdown-content
                 .menu-row
-                  a(href='/gem-education') Gem Education
+                  a(href='/learning/education') Gem Education
                 .menu-row
-                  a(href='/healing-properties') Healing Properties
+                  a(href='/learning/healing') Healing Properties
             li.dropdown
               a(href='/events') Events
               .dropdown-content
@@ -56,6 +56,7 @@ html
               i.fas.fa-shopping-cart
     main
       block content
+      a.btn.back-to-shop(href='/products') Back to Shop
     footer
       block footer
         .footer-bottom
