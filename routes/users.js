@@ -17,30 +17,31 @@ function createUsersRouter(db) {
 
     // Show registration form
     router.get('/register', (req, res) => {
-        res.render('register', {});
+        res.render('users/register', {});
     });
 
     // Handle registration
     router.post('/register', (req, res) => {
-        const { username, email, password } = req.body;
+        const { name, email, password } = req.body;
 
-        if (!username || !email || !password) {
+        if (!name || !email || !password) {
             return res.status(400).send('All fields are required');
         }
 
         // Optional: Hash password before storing
         const hashedPassword = bcrypt.hashSync(password, 10);
+        const {firstName, lastName} = name.split(' ');
 
         db.run(
-            'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
-            [username, email, hashedPassword],
+            'INSERT INTO users (email, password, first_name, last_name) VALUES (?, ?, ?, ?)',
+            [email, hashedPassword, firstName, lastName],
             function (err) {
                 if (err) {
                     console.error(err);
                     if (err.message.includes('UNIQUE')) {
-                        res.status(400).send('Username or Email already in use');
+                        res.status(400).render('users/register', {error: 'Email already in use'})
                     } else {
-                        res.status(500).send('Database error');
+                        res.status(400).render('users/register', {error: 'Database error'})
                     }
                 } else {
                     const userId = this.lastID;
@@ -51,7 +52,11 @@ function createUsersRouter(db) {
                             console.error(wishlistErr);
                             return res.status(500).send('Database error during wishlist creation');
                         }
-                        res.send('Registration successful! <a href="/users/login">Login here</a>');
+                        return res.render('users/login', {
+                            message: 'Registration successful! Proceed to login.',
+                            title: 'Login',
+                            pageClass: 'login-page',
+                        });
                     });
                 }
             }
@@ -60,41 +65,48 @@ function createUsersRouter(db) {
 
     // Show login form
     router.get('/login', (req, res) => {
-        res.send(`
-            <h1>Login</h1>
-            <form method="POST" action="/users/login">
-                <input name="username" placeholder="Username" required />
-                <input name="password" type="password" placeholder="Password" required />
-                <button type="submit">Login</button>
-            </form>
-        `);
+        res.render('users/login', {
+            pageClass: 'login-page',
+            title: 'Login',
+        })
     });
 
     // Handle login
     router.post('/login', (req, res) => {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
 
-        db.get('SELECT * FROM users WHERE username = ?', [username], (err, user) => {
+        db.get('SELECT * FROM users WHERE email = ?', [email], (err, user) => {
             if (err) {
                 console.error(err);
-                return res.status(500).send('Database error');
-            }
+                return res.status(500).render('users/login', {
+                    error: 'Database error!',
+                    title: 'Login',
+                    pageClass: 'login-page',
+                });            }
 
             if (!user) {
-                return res.status(401).send('Invalid username or password');
+                return res.status(401).render('users/login', {
+                    error: 'Invalid email or password!',
+                    title: 'Login',
+                    pageClass: 'login-page',
+                });
             }
 
             // Check hashed password
             const passwordMatch = bcrypt.compareSync(password, user.password);
             if (!passwordMatch) {
-                return res.status(401).send('Invalid username or password');
+                return res.status(401).render('users/login', {
+                    error: 'Invalid username or password!',
+                    title: 'Login',
+                    pageClass: 'login-page',
+                });
             }
 
             // Successful login
             req.session.userId = user.id;
-            req.session.username = user.username;
-
-            res.send(`Logged in as ${user.username}. <a href="/users/logout">Logout</a>`);
+            req.session.email = user.email;
+            req.session.message = 'Login successful!';
+            return res.redirect('/');
         });
     });
 
@@ -115,26 +127,22 @@ function createUsersRouter(db) {
         const userId = req.session.userId;
         if (!userId) return res.status(401).send('You must be logged in.');
 
-        db.get('SELECT username, email, phone FROM users WHERE id = ?', [userId], (err, user) => {
+        db.get('SELECT email, phone FROM users WHERE id = ?', [userId], (err, user) => {
             if (err) {
                 console.error(err);
                 return res.status(500).send('Database error');
             }
             if (!user) return res.status(404).send('User not found');
-
-            res.send(`
-                <h1>Your Profile</h1>
-                <p><strong>Username:</strong> ${user.username}</p>
-                <form method="POST" action="/users/profile/update">
-                    <input name="email" value="${user.email}" placeholder="Email" required />
-                    <input name="phone" value="${user.phone || ''}" placeholder="Phone Number" />
-                    <input name="password" type="password" placeholder="New Password (optional)" />
-                    <button type="submit">Update Profile</button>
-                </form>
-                <p><a href="/users/logout">Logout</a></p>
-            `);
+            res.render('users/profile', {
+                title: 'Your Profile',
+                user,
+                pageClass: 'profile-page',
+                message: req.session.message,
+            });
+            delete req.session.message;
         });
     });
+
 
     // Handle Profile Update
     router.post('/profile/update', (req, res) => {
@@ -171,11 +179,17 @@ function createUsersRouter(db) {
                 if (err) {
                     console.error(err);
                     if (err.message.includes('UNIQUE')) {
-                        return res.status(400).send('Email already in use');
+                        return res.status(400).render('users/profile', {
+                            error: 'Email already in use',
+                            user: { email, phone },
+                            title: 'Your Profile',
+                            pageClass: 'profile-page',
+                        });
                     }
                     return res.status(500).send('Database error');
                 }
-                res.send('Profile updated successfully! <a href="/users/profile">Back to profile</a>');
+                req.session.message = 'Profile updated successfully!';
+                res.redirect('/users/profile');
             }
         );
     });

@@ -38,6 +38,9 @@ if (config.debug) {
   const liveReloadServer = livereload.createServer();
   liveReloadServer.watch(path.join(__dirname, 'public'));
 
+  // Watch views folder for .jade/.pug changes
+  liveReloadServer.watch(path.join(__dirname, 'views')); // or './views' depending on your structure
+
   app.use(connectLivereload());
 
   liveReloadServer.server.once("connection", () => {
@@ -68,6 +71,13 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: config.session.secure }
 }))
+
+app.use((req, res, next) => {
+  res.locals.user = {
+    email: req.session?.email,
+  };
+  next();
+});
 
 // register json response middleware
 app.use(express.json());

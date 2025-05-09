@@ -13,7 +13,7 @@ html
       //- Fallback for development
       link(rel="stylesheet", href='/dist/styles.css')
       script(src='dist/main.js')
-  body
+  body(class="#{page-class}")
     header
       block header
         nav
@@ -31,7 +31,7 @@ html
               a(href='/services') Services
               .dropdown-content
                 .menu-row
-                  a(class="menu-row" href='/services/custom') Gem Cutting
+                  a(href='/services/custom') Gem Cutting
                 .menu-row
                   a(href='/services/design') Jewelry Design
             li.dropdown
@@ -53,16 +53,20 @@ html
             li
               a(href='/faq') FAQ
           .actions
-            .search-container
-              input.search-bar(type='text', placeholder='Search...')
-              svg.search-icon(xmlns='http://www.w3.org/2000/svg', fill='none', viewBox='0 0 24 24', stroke-width='1.5', stroke='currentColor')
-                path(stroke-linecap='round', stroke-linejoin='round', d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z')
-            a.signin-btn(href='/users/login') Sign In
-            a.cart-btn(href="/cart")
+            form.search-form(action="/search/results", method="GET")
+              input.search-bar(type="text", name="q", placeholder="Search products...")
+              button.search-btn(type="submit", aria-label="Search")
+                svg.search-icon(xmlns='http://www.w3.org/2000/svg', fill='none', viewBox='0 0 24 24', stroke-width='1.5', stroke='currentColor')
+                  path(stroke-linecap='round', stroke-linejoin='round', d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z')
+            if user && user.email
+              a.signin-btn(href='/users/profile') Profile
+              a.signin-btn(href='/users/logout') Log Out
+            else
+              a.signin-btn(href='/users/login') Sign In
+            a.cart-btn(href='/cart')
               i.fas.fa-shopping-cart
     main
       block content
-      a.btn.back-to-shop(href='/products') Back to Shop
     footer
       block footer
         .footer-bottom
