@@ -2,6 +2,15 @@ const express = require('express');
 
 function createEventsRouter(db) {
     const router = express.Router();
+
+    router.get('/past', function(req, res) {
+        return res.render('events/past', {title: 'Past Events'});
+    });  
+
+    router.get('/upcoming', function(req, res) {
+        return res.render('events/upcoming', {title: 'Upcoming Events'});
+    });
+      
     // Create a new event
     router.post('/', (req, res) => {
         const { name, description, date } = req.body;
@@ -31,7 +40,7 @@ function createEventsRouter(db) {
                 console.error(err);
                 return res.status(500).send('Database error fetching events');
             }
-            res.json(rows);
+            return res.render('events', {title: 'All Events'});
         });
     });
 

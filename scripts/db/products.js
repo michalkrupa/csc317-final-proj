@@ -3,26 +3,28 @@
 const { execute, query } = require('./sql');
 
 const products = [
-    ["Amethyst Ring", "Elegant purple gemstone ring.", 120.00, "product1.jpeg"],
-    ["Emerald Necklace", "Vibrant green emerald pendant.", 250.00, "product2.jpeg"],
-    ["Ruby Earrings", "Bold ruby gemstone earrings.", 180.00, "product3.jpeg"],
-    ["Sapphire Bracelet", "Blue sapphire stones in silver.", 210.00, "product4.jpeg"],
-    ["Diamond Pendant", "Classic diamond solitaire necklace.", 320.00, "product5.jpeg"],
-    ["Topaz Brooch", "Yellow topaz brooch with vintage design.", 145.00, "product6.jpeg"],
-    ["Opal Ring", "Iridescent opal gemstone ring.", 160.00, "product7.jpeg"],
-    ["Citrine Studs", "Golden citrine stud earrings.", 95.00, "product8.jpeg"],
-    ["Turquoise Cuff", "Bold turquoise in handcrafted cuff.", 190.00, "product9.jpeg"],
-    ["Garnet Chain", "Dark red garnet on gold chain.", 130.00, "product10.jpeg"],
-    ["Moonstone Charm", "Soft glowing moonstone charm.", 110.00, "product11.jpeg"],
-    ["Aquamarine Ring", "Calm blue aquamarine in silver.", 200.00, "product12.jpeg"]
+    ["Amethyst Ring", "Elegant purple gemstone ring.", 120.00, "product1.jpeg", false, false],
+    ["Emerald Necklace", "Vibrant green emerald pendant.", 250.00, "product2.jpeg", false, true],
+    ["Ruby Earrings", "Bold ruby gemstone earrings.", 180.00, "product3.jpeg", false, false],
+    ["Sapphire Bracelet", "Blue sapphire stones in silver.", 210.00, "product4.jpeg", true, true],
+    ["Diamond Pendant", "Classic diamond solitaire necklace.", 320.00, "product5.jpeg", false, true],
+    ["Topaz Brooch", "Yellow topaz brooch with vintage design.", 145.00, "product6.jpeg", false, false],
+    ["Opal Ring", "Iridescent opal gemstone ring.", 160.00, "product7.jpeg", false, false],
+    ["Citrine Studs", "Golden citrine stud earrings.", 95.00, "product8.jpeg", true, false],
+    ["Turquoise Cuff", "Bold turquoise in handcrafted cuff.", 190.00, "product9.jpeg", false, false],
+    ["Garnet Chain", "Dark red garnet on gold chain.", 130.00, "product10.jpeg", false, false],
+    ["Moonstone Charm", "Soft glowing moonstone charm.", 110.00, "product11.jpeg", false, false],
+    ["Aquamarine Ring", "Calm blue aquamarine in silver.", 200.00, "product12.jpeg", true, false],
 ];
 
 const addImageToProducts = (productData) => {
-    return productData.map(([name, description, price, image]) => ({
+    return productData.map(([name, description, price, image, is_sale, is_featured]) => ({
         name,
         description,
         price,
-        image
+        image,
+        is_sale,
+        is_featured,
     }));
 };
 
@@ -61,9 +63,9 @@ const createProducts = async (db) => {
 
         for (const product of productObjects) {
             await db.run(
-                `INSERT INTO products (name, description, price, image)
-                 VALUES (?, ?, ?, ?)`,
-                [product.name, product.description, product.price, product.image]
+                `INSERT INTO products (name, description, price, image, is_sale, is_featured)
+                 VALUES (?, ?, ?, ?, ?, ?)`,
+                [product.name, product.description, product.price, product.image, product.is_sale, product.is_featured]
             );
         }
         console.log('Products seeded.');

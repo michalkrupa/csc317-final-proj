@@ -10,7 +10,7 @@ function createServicesRouter(db) {
                 console.error(err);
                 res.status(500).send('Database error');
             } else {
-                res.json(rows);
+                return res.render('services', {scheduled_services: rows, title: 'All Services'});
             }
         });
     });
@@ -59,6 +59,16 @@ function createServicesRouter(db) {
             }
         });
     });
+
+    // View all services
+    router.get('/custom', (req, res) => {
+        res.render('services/cutting', {title: 'Custom Cutting'});
+    });
+
+    router.get('/design', (req, res) => {
+        res.render('services/design', {title: 'Custom Designs'});
+    });
+
 
     return router;
 }

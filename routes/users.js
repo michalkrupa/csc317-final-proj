@@ -17,16 +17,7 @@ function createUsersRouter(db) {
 
     // Show registration form
     router.get('/register', (req, res) => {
-        res.send(`
-            <h1>Register</h1>
-            <form method="POST" action="/users/register">
-                <input name="username" placeholder="Username" required />
-                <input name="email" placeholder="Email" type="email" required />
-                <input name="password" type="password" placeholder="Password" required />
-                <button type="submit">Register</button>
-            </form>
-            <p>Already have an account? <a href="/users/login">Login here</a></p>
-        `);
+        res.render('register', {});
     });
 
     // Handle registration

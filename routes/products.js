@@ -3,6 +3,13 @@ const express = require('express');
 function createProductsRouter(db) {
     const router = express.Router();
 
+    router.get('/crystals', (req, res) => {
+        res.render('products/crystals', {title: 'All Crystals'});
+    })
+
+    router.get('/jewelry', (req, res) => {
+        res.render('products/jewelry', {title: 'All Jewelry'});
+    })
 
     // Create a new product
     router.post('/', (req, res) => {
