@@ -1,11 +1,18 @@
 extends ../layout
 
-h1 Register
-form(method="POST" action="/users/register")
-    input(name="username" placeholder="Username" required)
-    input(name="email" placeholder="Email" type="email" required)
-    input(name="password" type="password" placeholder="Password" required)
-    button(type="submit") Register
+block content
+  .login-container
+    h1 Login
+    if message
+      .message= message
+    if error
+      .error-message= error
+        h1 Register
+    form(method="POST" action="/users/register")
+        input(name="name" placeholder="First and last name" type="text" required)
+        input(name="email" placeholder="Email" type="email" required)
+        input(name="password" type="password" placeholder="Password" required)
+        button(type="submit") Register
 
-p Already have an account?
-    a(href="/users/login") Login here
+    p Already have an account? 
+        a(href="/users/login") Login here

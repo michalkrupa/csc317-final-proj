@@ -4,7 +4,7 @@ const { createNewsletterSubs } = require('./newsletters');
 const { createProducts } = require('./products');
 const { createService } = require('./services');
 const { createOrders } = require('./orders');
-const { createUsers, ensurePasswordColumn } = require('./users');
+const { createUsers, ensurePasswordColumn, ensureFirstAndLastNameColumns } = require('./users');
 const { createWishlist } = require('./wishlists');
 
 const tables = [
@@ -14,6 +14,7 @@ const tables = [
     createOrders,
     createUsers,
     ensurePasswordColumn,
+    ensureFirstAndLastNameColumns,
     createCart,
     createWishlist,
     createNewsletterSubs,

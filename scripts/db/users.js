@@ -6,10 +6,11 @@ const createUsers = async (db) => {
             db,
             `CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY,
-                username TEXT NOT NULL UNIQUE,
                 email TEXT NOT NULL UNIQUE,
                 password TEXT NOT NULL DEFAULT '',
-                phone TEXT
+                phone TEXT,
+                first_name TEXT DEFAULT '',
+                last_name TEXT DEFAULT ''
             )`
         );
     } catch (error) {
@@ -19,7 +20,8 @@ const createUsers = async (db) => {
     }
 };
 
-const ensurePasswordColumn = async (db) => {
+// Generic helper to ensure a column exists
+const ensureColumnExists = async (db, columnName, columnType, defaultValue = "''") => {
     const columns = await new Promise((resolve, reject) => {
         db.all('PRAGMA table_info(users)', [], (err, rows) => {
             if (err) return reject(err);
@@ -27,32 +29,42 @@ const ensurePasswordColumn = async (db) => {
         });
     });
 
-    const hasPasswordColumn = columns.some(col => col.name === 'password');
+    const hasColumn = columns.some(col => col.name === columnName);
 
-    if (!hasPasswordColumn) {
-        console.log('Adding missing password column to users table...');
+    if (!hasColumn) {
+        console.log(`Adding missing ${columnName} column to users table...`);
         try {
             await new Promise((resolve, reject) => {
-            db.run(
-                `ALTER TABLE users ADD COLUMN password TEXT NOT NULL DEFAULT ''`,
-                [],
-                (err) => {
-                    if (err) return reject(err);
-                    resolve();
-                }
-            );
-        });
+                db.run(
+                    `ALTER TABLE users ADD COLUMN ${columnName} ${columnType} DEFAULT ${defaultValue}`,
+                    [],
+                    (err) => {
+                        if (err) return reject(err);
+                        resolve();
+                    }
+                );
+            });
         } catch (error) {
-            console.log(error)
+            console.log(error);
         } finally {
-            console.log('Password column added.');
+            console.log(`${columnName} column added.`);
         }
     } else {
-        console.log('Password column already exists.');
+        console.log(`${columnName} column already exists.`);
     }
+};
+
+const ensurePasswordColumn = async (db) => {
+    await ensureColumnExists(db, 'password', 'TEXT', "''");
+};
+
+const ensureFirstAndLastNameColumns = async (db) => {
+    await ensureColumnExists(db, 'first_name', 'TEXT', "''");
+    await ensureColumnExists(db, 'last_name', 'TEXT', "''");
 };
 
 module.exports = {
     createUsers,
     ensurePasswordColumn,
+    ensureFirstAndLastNameColumns,
 };

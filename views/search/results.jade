@@ -4,18 +4,23 @@ block content
   h1= title
 
   if query
-    p Showing results for "#{query}"
+    p.tagline Showing results for "#{query}"
 
   if sort
-    p Sorted by "#{sort}"
+    p.tagline Sorted by "#{sort}"
 
   if products.length
-    ul
+    ul.product-grid#search-results
       each product in products
-        li
-          strong #{product.name}
-          |  - $#{product.price.toFixed(2)}
-          if product.is_sale
-            |  (On Sale!)
+        li.product-item
+          a(href=`/products/${product.id}` aria-label=`View details for ${product.name}`)
+            img(src=`/images/${product.image}`, alt=product.name, onerror="this.onerror=null; this.src='https://via.placeholder.com/200x200';")
+            h3= product.name
+            p= product.description
+            span $#{product.price.toFixed(2)}
+            if product.is_sale
+              span.sale-flag On Sale!
+          a(href=`/cart/add/${product.id}`)
+            button.add-to-cart-btn Add to Cart
   else
     p No products found.
