@@ -12,20 +12,22 @@ body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(to top, lightblue, rgb(246, 246, 246));
   background-size: cover;
-  padding-top: 200px;
 }
 
 /* Navigation bar */
+header {
+  padding: 0;
+  margin: 0 0 50px;
+}
+
 nav {
   display: flex;
-  position: fixed;
   top: 0;
   width: 100%;
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(to right, lightblue, rgb(246, 246, 246));
   border-bottom: 1px solid lightblue;
-  padding: 10px;
   z-index: 1000;
 }
 

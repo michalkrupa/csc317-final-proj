@@ -5,9 +5,12 @@ var config = require('./config');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const fs = require("fs");
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+var livereload = require('livereload');
+var connectLivereload = require('connect-livereload');
 
 //Create express app
 var app = express();
@@ -32,8 +35,31 @@ app.set('view engine', 'jade');
 
 // register logging interface
 if (config.debug) {
+  const liveReloadServer = livereload.createServer();
+  liveReloadServer.watch(path.join(__dirname, 'public'));
+
+  app.use(connectLivereload());
+
+  liveReloadServer.server.once("connection", () => {
+    setTimeout(() => {
+      liveReloadServer.refresh("/");
+    }, 100);
+  });
+
   app.use(logger('dev'));
 }
+
+if (config.production) {
+  console.log('mew mew mew');
+  const manifestPath = path.join(__dirname, "public/dist/manifest.json");
+
+  if (fs.existsSync(manifestPath)) {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+
+    app.locals.manifest = manifest;
+  }
+}
+
 
 //register auth middleware
 app.use(session({
