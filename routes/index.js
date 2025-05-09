@@ -13,6 +13,9 @@ function createIndexRouter(db) {
           res.render(
             'index',{
               title: 'Home',
+              user: {
+                email: req.session?.email,
+              },
               sale_products: sale_products,
               featured_products: featured_products,
             });

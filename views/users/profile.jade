@@ -1,7 +1,25 @@
 extends ../layout
 
 block content
-	h1 Welcome to Your Profile
-	p Name: #{user.name}
-	p Email: #{user.email}
-	p Member #{user.created_at}
+  .profile-container
+    h1 Your Profile
+
+    if message
+      .message= message
+    if error
+      .error-message= error
+
+    form.profile-form(method="POST", action="/users/profile/update")
+      label(for="email") Email
+      input(type="email", name="email", value=user.email, required)
+
+      label(for="phone") Phone Number
+      input(type="tel", name="phone", value=user.phone || '', placeholder="Optional")
+
+      label(for="password") New Password
+      input(type="password", name="password", placeholder="Leave blank to keep current")
+
+      button(type="submit") Update Profile
+
+    a.back-to-shop(href="/products") Back to Shop
+    a.logout-link(href="/users/logout") Log Out

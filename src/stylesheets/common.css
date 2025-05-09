@@ -1,0 +1,201 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to top, lightblue, rgb(246, 246, 246));
+  margin: 0;
+}
+
+/* Header + Navigation */
+header {
+  margin-bottom: 50px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, lightblue, rgb(246, 246, 246));
+  border-bottom: 1px solid lightblue;
+  padding: 0 2rem;
+}
+
+nav .logo img {
+  width: 120px;
+  cursor: pointer;
+}
+
+nav .menu {
+  display: flex;
+  list-style: none;
+}
+
+nav .menu li {
+  margin: 0 15px;
+  position: relative;
+}
+
+nav .menu a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+}
+
+nav .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  border-radius: 10px;
+  background: linear-gradient(to right, lightblue, rgb(246, 246, 246));
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  z-index: 1000;
+}
+
+nav .dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+}
+
+nav .actions {
+  display: flex;
+  align-items: center;
+}
+
+nav .signin-btn,
+nav .cart-btn,
+nav .profile-btn {
+  background-color: lightblue;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+nav .signin-btn:hover,
+nav .cart-btn:hover,
+nav .profile-btn:hover {
+  background-color: #a8d5f2;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(to top, lightblue, rgb(246, 246, 246));
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+  font-size: 14px;
+  color: black;
+  margin: 0;
+}
+
+/* Shared UI Elements */
+a.back-to-shop {
+  display: inline-block;
+  margin: 2rem auto;
+  text-align: center;
+  padding: 10px 20px;
+  background-color: lightblue;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a.back-to-shop:hover {
+  background-color: #0077cc;
+}
+
+/* Flash/Message Banners */
+.message,
+.error-message {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.message {
+  background-color: #e0f7e9;
+  border: 1px solid #27ae60;
+  color: #2e7d32;
+}
+
+.error-message {
+  background-color: #fdecea;
+  border: 1px solid #e74c3c;
+  color: #c0392b;
+}
+
+/* Search Bar */
+.search-form {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.search-bar {
+  border: none;
+  padding: 10px 12px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-btn {
+  background-color: lightblue;
+  border: none;
+  padding: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 100%;
+}
+
+.search-btn:hover {
+  background-color: #a8d5f2;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  stroke: white;
+}
+
+/* Responsive Nav */
+@media (max-width: 768px) {
+  nav .menu {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  nav .menu li {
+    margin-bottom: 10px;
+  }
+}
