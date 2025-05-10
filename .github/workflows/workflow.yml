@@ -18,6 +18,13 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Commit build artifacts
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add -f public/dist/
+          git commit -m "Add build artifacts for deployment" || echo "No changes to commit"
+
       - uses: lonnen/sync-branch-to-glitch-action@v0.0.4
         env:
           GLITCH_GIT_URL: ${{ secrets.GLITCH_GIT_URL }}
