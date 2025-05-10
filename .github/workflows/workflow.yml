@@ -32,6 +32,9 @@ jobs:
           npm ci
           npm run build
 
+          # Remove 'public/dist' or 'dist' from .gitignore
+          sed -i '/^public\/dist\/\?/d' .gitignore
+
           # Stage the build output
           git add -f public/dist/
 
