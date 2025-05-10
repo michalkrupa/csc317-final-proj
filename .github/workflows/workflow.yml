@@ -17,12 +17,26 @@ jobs:
           GLITCH_GIT_URL: ${{ secrets.GLITCH_GIT_URL }}
         run: |
           GGU=${GLITCH_GIT_URL:?"Missing Glitch Git URL in Environment. Please check your yml file"}
+
+          # Add Glitch as remote
           git remote add glitch "${GGU}"
+
+          # Unshallow the repo to allow pushing
           git fetch --unshallow
+
+          # Set up Git config
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+
+          # Install dependencies and build
           npm ci
           npm run build
+
+          # Stage the build output
           git add -f public/dist/
+
+          # Commit if needed
           git commit -m "Add build artifacts for deployment" || echo "No changes to commit"
+
+          # Force push current HEAD to Glitch's main
           git push -f glitch HEAD:main
