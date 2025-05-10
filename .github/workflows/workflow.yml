@@ -31,7 +31,7 @@ jobs:
         env:
           GLITCH_GIT_URL: ${{ secrets.GLITCH_GIT_URL }}
         run: |
-          git fetch --unshallow
           GGU=${GLITCH_GIT_URL:?"Missing Glitch Git URL in Environment. Please check your yml file"}
           git remote add glitch "${GGU}"
+          git fetch --unshallow
           git push -f glitch "${GITHUB_BRANCH:=main}":main
