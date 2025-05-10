@@ -11,6 +11,13 @@ jobs:
     permissions:
       contents: read
     steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
       - uses: lonnen/sync-branch-to-glitch-action@v0.0.4
         env:
           GLITCH_GIT_URL: ${{ secrets.GLITCH_GIT_URL }}
