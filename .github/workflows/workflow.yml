@@ -18,13 +18,6 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Commit build artifacts
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add -f public/dist/
-          git commit -m "Add build artifacts for deployment" || echo "No changes to commit"
-
       - uses: actions/checkout@v2
 
       - name: Push to Glitch
@@ -34,4 +27,8 @@ jobs:
           GGU=${GLITCH_GIT_URL:?"Missing Glitch Git URL in Environment. Please check your yml file"}
           git remote add glitch "${GGU}"
           git fetch --unshallow
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add -f public/dist/
+          git commit -m "Add build artifacts for deployment" || echo "No changes to commit"
           git push -f glitch HEAD:main
