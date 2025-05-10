@@ -33,4 +33,4 @@ jobs:
         run: |
           GGU=${GLITCH_GIT_URL:?"Missing Glitch Git URL in Environment. Please check your yml file"}
           git remote add glitch "${GGU}"
-          git push glitch "${GITHUB_BRANCH:=main}":main
+          git push -f glitch "${GITHUB_BRANCH:=main}":main
