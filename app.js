@@ -53,7 +53,6 @@ if (config.debug) {
 }
 
 if (config.production) {
-  console.log('mew mew mew');
   const manifestPath = path.join(__dirname, "public/dist/manifest.json");
 
   if (fs.existsSync(manifestPath)) {
