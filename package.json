@@ -23,7 +23,7 @@
     "sqlite3": "^5.1.7"
   },
   "engine": {
-    "node": "16.x"
+    "node": ">=16.x"
   },
   "devDependencies": {
     "babel-loader": "^10.0.0",
