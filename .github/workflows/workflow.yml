@@ -28,6 +28,8 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Push to Glitch
+        env:
+          GLITCH_GIT_URL: ${{ secrets.GLITCH_GIT_URL }}
         run: |
           GGU=${GLITCH_GIT_URL:?"Missing Glitch Git URL in Environment. Please check your yml file"}
           git remote add glitch "${GGU}"
