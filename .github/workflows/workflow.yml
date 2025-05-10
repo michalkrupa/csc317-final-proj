@@ -30,8 +30,10 @@ jobs:
       - name: Push to Glitch
         env:
           GLITCH_TOKEN: ${{ secrets.GLITCH_TOKEN }}
+          GLITCH_USER: ${{ secrets.GLITCH_USER }}
+          GLITCH_EMAIL: ${{ secrets.GLITCH_EMAIL }}
         run: |
-          git config --global user.name "Github Actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.name ${GLITCH_USER}
+          git config --global user.email ${GLITCH_EMAIL}
           git remote add glitch https://${GLITCH_TOKEN}@api.glitch.com/git/boom-ludicrous-adjustment
           git push -f glitch main
