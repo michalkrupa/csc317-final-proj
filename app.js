@@ -90,7 +90,7 @@ app.use(cookieParser());
 
 //mount static dir
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/src', express.static(path.join(__dirname, 'src')));
 //register all routers
 createRouters(app, db);
 
