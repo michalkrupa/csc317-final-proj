@@ -30,7 +30,7 @@ system before running the project:
 2. Configure the following `secrets` in Github:
 
 ```
-GLITCH_GIT_URL # URL to Glitch git deployment
+GLITCH_GIT_URL # https://boom-ludicrous-adjustment.glitch.me
 ```
 
 ### Troubleshooting
