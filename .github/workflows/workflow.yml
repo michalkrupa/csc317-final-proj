@@ -11,15 +11,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build project
-        run: npm run build
-
       - uses: actions/checkout@v2
-
       - name: Push to Glitch
         env:
           GLITCH_GIT_URL: ${{ secrets.GLITCH_GIT_URL }}
@@ -29,6 +21,8 @@ jobs:
           git fetch --unshallow
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+          npm ci
+          npm run build
           git add -f public/dist/
           git commit -m "Add build artifacts for deployment" || echo "No changes to commit"
           git push -f glitch HEAD:main
