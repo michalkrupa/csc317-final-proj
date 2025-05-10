@@ -28,18 +28,5 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-          # Install dependencies and build
-          npm ci
-          npm run build
-
-          # Remove 'public/dist' or 'dist' from .gitignore
-          sed -i '/^public\/dist\/\?/d' .gitignore
-
-          # Stage the build output
-          git add -f public/dist/
-
-          # Commit if needed
-          git commit -m "Add build artifacts for deployment" || echo "No changes to commit"
-
           # Force push current HEAD to Glitch's main
           git push -f glitch HEAD:main
