@@ -9,5 +9,5 @@ block content
           img(src='/images/#{product.image}' alt='#{product.name}' onerror="this.onerror=null; this.src='https://via.placeholder.com/200x200';")
           h3 #{product.name}
           p #{product.description}
-          span $#{(product.price || 0).toFixed(2)}   // Ensure it's a valid number
+          span $#{(product.price || 0).toFixed(2)}   
 

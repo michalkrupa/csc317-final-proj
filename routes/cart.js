@@ -48,32 +48,33 @@ function createCartRouter(db) {
         );
     });
 
-    // Remove item from cart (POST route)
     router.post('/remove', (req, res) => {
-        const { cart_item_id } = req.body;
-        if (!cart_item_id) return res.status(400).send('Cart item ID required');
+    const { cart_item_id } = req.body;
+    if (!cart_item_id) return res.status(400).send('Cart item ID required');
 
-        const userId = req.session.userId || null;
-        const sessionId = req.session.id;
+    const userId = req.session.userId || null;
+    const sessionId = req.session.id;
 
-        db.run(
-            `DELETE FROM cart 
-             WHERE id = ? AND (user_id = ? OR session_id = ?)`,
-            [cart_item_id, userId, sessionId],
-            function (err) {
-                if (err) {
-                    console.error(err);
-                    return res.status(500).send('Database error');
-                }
-
-                if (this.changes === 0) {
-                    return res.status(404).send('Cart item not found');
-                }
-
-                res.json({ message: 'Product removed from cart' });
+    db.run(
+        `DELETE FROM cart 
+         WHERE id = ? AND (user_id = ? OR session_id = ?)`,
+        [cart_item_id, userId, sessionId],
+        function (err) {
+            if (err) {
+                console.error(err);
+                return res.status(500).send('Database error');
             }
-        );
-    });
+
+            if (this.changes === 0) {
+                return res.status(404).send('Cart item not found');
+            }
+
+            // Redirect to checkout page after successful removal
+            res.redirect('/cart/checkout');
+        }
+    );
+});
+
 
     // Checkout View (GET route)
     router.get('/checkout', (req, res) => {

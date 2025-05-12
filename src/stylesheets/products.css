@@ -54,12 +54,16 @@ body.shop-page h2 {
 .product-item h3 {
   font-size: 1.2rem;
   margin: 0.5rem 1rem 0;
+  border: none; /* Remove any border */
+  text-decoration: none; /* Remove any underline or decoration */
 }
 
 .product-item p {
   font-size: 0.95rem;
   margin: 0.5rem 1rem;
   color: #555;
+  border: none; /* Remove any border */
+  text-decoration: none; /* Remove any underline or decoration */
 }
 
 .product-item span {
@@ -87,8 +91,6 @@ body.shop-page h2 {
 .add-to-cart-btn:hover {
   background-color: rgb(19, 107, 215);
 }
-
-
 
 /* Product Image */
 .product-detail img.product-image {
