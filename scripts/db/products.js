@@ -4,7 +4,7 @@ const products = [
     ["Emerald Pendant", "A vibrant emerald pendant on a delicate gold chain, blending natural beauty with timeless elegance.", 1220.00, "product1.jpeg", 0, 1],
     ["Ruby Pendant", "A rich ruby pendant on a fine white gold chain, radiating bold color and classic charm.", 240.00, "product2.jpeg", 1, 0],
     ["Aquamarine Pendant", "A serene aquamarine pendant on a sleek silver chain, exuding calm and elegance.", 140.00, "product3.jpeg", 1, 0],
-    ["Diamond Ring", "A dazzling 3-carat diamond set in a luxurious 22K gold band, embodying brilliance and opulence.", 5500.00, "product4.jpeg", 0, 1],
+    ["Diamond Ring", "A dazzling 3-carat diamond set in a luxurious 22K gold band, embodying brilliance and opulence.", 5500.00, "product4.jpeg", 1, 0],
     ["Emerald Pendant", "A striking 6-carat emerald pendant on a polished silver chain, showcasing bold elegance and rich color.", 2240.00, "product5.jpeg", 1, 0],
     ["Ruby", "A stunning 5-carat cut ruby, radiating deep red brilliance-perfect as a standout centerpiece.", 3540.00, "product6.jpeg", 0, 0],
     ["Sapphire", "A captivating 6-carat cut sapphire, showcasing deep blue hues and refined brilliance-ideal for a luxurious statement piece.", 10500.00, "product7.jpeg", 0, 0],
