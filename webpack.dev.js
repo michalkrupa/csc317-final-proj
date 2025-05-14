@@ -4,17 +4,17 @@ const path = require("path");
 
 module.exports = merge(common({ production: false }), {
   mode: "development",
-  devtool: "eval-source-map",
+  devtool: "eval-source-map", // You can keep this for source maps in development
   devServer: {
     static: {
       directory: path.join(__dirname, "public"),
     },
     port: 8080,
-    hot: true,
-    liveReload: true,
+    hot: true,               // Enable hot-reloading
+    liveReload: true,        // Enable live reloading
     devMiddleware: {
       publicPath: "/dist/",
-      writeToDisk: true, // Write files to disk
+      writeToDisk: true,      // Write files to disk
     },
     proxy: [
       {
@@ -23,6 +23,6 @@ module.exports = merge(common({ production: false }), {
         secure: false,
       }
     ],
-    historyApiFallback: true,
+    historyApiFallback: true, // For single-page apps
   },
 });
