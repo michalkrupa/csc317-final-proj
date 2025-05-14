@@ -18,8 +18,6 @@ block content
             h3= product.name
             p= product.description
             span $#{product.price.toFixed(2)}
-          a(href=`/cart/add/${product.id}`)
-            button.add-to-cart-btn Add to Cart
 
     h2.section-title Shop Spring Sale
     ul.product-grid
@@ -30,7 +28,4 @@ block content
             h3= product.name
             p= product.description
             span $#{product.price.toFixed(2)}
-          a(href=`/cart/add/${product.id}`)
-            button.add-to-cart-btn Add to Cart
-
     a.back-to-shop(href='/products') View All Products

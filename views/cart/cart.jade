@@ -1,18 +1,19 @@
 extends ../layout
 
 block content
-  h1= title
+  .container
+    h1= title
 
-  if cartItems.length
-    ul
-      each item in cartItems
-        li
-          | #{item.product_name} - $#{item.price_per_unit.toFixed(2)} x #{item.quantity}
-          form(method="POST", action=`/cart/remove`)
-            input(type="hidden", name="cart_item_id", value=item.id)
-            button(type="submit") Remove
-    br
-    a(href="/cart/checkout") Go to Checkout
-  else
-    p Your cart is empty.
-    a(href="/products") Browse Products
+    if cartItems.length
+      ul.cart-items
+        each item in cartItems
+          li.cart-item
+            span.cart-product #{item.product_name}
+            span.cart-details $#{item.price_per_unit.toFixed(2)} x #{item.quantity}
+            form(method="POST", action="/cart/remove")
+              input(type="hidden", name="cart_item_id", value=item.id)
+              button.remove-btn(type="submit") Remove
+      a.btn(href="/cart/checkout") Checkout
+    else
+      p Your cart is empty.
+      a.btn(href="/products") Browse Products
