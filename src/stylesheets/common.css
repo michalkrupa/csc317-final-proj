@@ -8,7 +8,7 @@
 body {
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to top, lightblue, rgb(246, 246, 246));
+  background: linear-gradient(to top, lightblue, rgb(246, 246, 246)); /* This gradient is kept for body */
   margin: 0;
 }
 
@@ -21,7 +21,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to right, lightblue, rgb(246, 246, 246));
+  background: linear-gradient(to right, lightblue, rgb(246, 246, 246)); /* Gradient kept here */
   border-bottom: 1px solid lightblue;
   padding: 0 2rem;
 }
@@ -83,6 +83,8 @@ nav .profile-btn {
   font-size: 16px;
   cursor: pointer;
   margin-left: 10px;
+  text-decoration: none;
+  outline: none;
 }
 
 nav .signin-btn:hover,
@@ -93,7 +95,7 @@ nav .profile-btn:hover {
 
 /* Footer */
 footer {
-  background: linear-gradient(to top, lightblue, rgb(246, 246, 246));
+  background: linear-gradient(to top, lightblue, rgb(246, 246, 246)); /* This gradient is fine */
   text-align: center;
   padding: 20px;
   width: 100%;
@@ -112,7 +114,7 @@ a.back-to-shop {
   margin: 2rem auto;
   text-align: center;
   padding: 10px 20px;
-  background-color: lightblue;
+  background-color:  #1e90ff;
   color: white;
   border-radius: 8px;
   font-weight: bold;
@@ -120,7 +122,7 @@ a.back-to-shop {
 }
 
 a.back-to-shop:hover {
-  background-color: #0077cc;
+  background-color: #063ca9;
 }
 
 /* Flash/Message Banners */

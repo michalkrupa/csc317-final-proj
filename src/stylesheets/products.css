@@ -54,12 +54,16 @@ body.shop-page h2 {
 .product-item h3 {
   font-size: 1.2rem;
   margin: 0.5rem 1rem 0;
+  border: none; /* Remove any border */
+  text-decoration: none; /* Remove any underline or decoration */
 }
 
 .product-item p {
   font-size: 0.95rem;
   margin: 0.5rem 1rem;
   color: #555;
+  border: none; /* Remove any border */
+  text-decoration: none; /* Remove any underline or decoration */
 }
 
 .product-item span {
@@ -73,8 +77,10 @@ body.shop-page h2 {
   margin: 0 1rem 1rem;
   padding: 10px;
   width: calc(100% - 2rem);
-  background-color: lightblue;
-  color: white;
+  background-color: rgb(49, 176, 218);
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+  font-weight: bold;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -84,4 +90,106 @@ body.shop-page h2 {
 
 .add-to-cart-btn:hover {
   background-color: rgb(19, 107, 215);
+}
+
+/* Product Image */
+.product-detail img.product-image {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px; /* Set max width to avoid too large images */
+  height: auto;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Softer, more natural shadow */
+  border: 1px solid #ddd; /* Lighter border */
+}
+
+/* Product Title */
+.product-detail h2 {
+  font-size: 2.5rem;
+  color: #161616;
+  text-align: center;
+  margin: 1rem 0;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Product Description */
+.product-detail p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #161616;
+  margin: 1rem 0;
+  line-height: 1.5;
+  max-width: 800px; /* Limiting width for readability */
+  margin: 0 auto;
+}
+
+/* Product Price */
+.product-detail span {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #0077cc; /* Highlight price in a primary accent color */
+}
+
+/* Add to Cart Button */
+.product-detail .add-to-cart-btn {
+  display: block;
+  text-align: center;
+  background-color: #1e90ff; /* Vibrant blue */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  margin: 1.5rem auto;
+  width: auto;
+  border-radius: 20px; /* Rounded button */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth animation */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Hover effect for button */
+.product-detail .add-to-cart-btn:hover {
+  background-color: #0077cc; /* Darker blue on hover */
+  transform: translateY(-3px); /* Lift effect */
+}
+
+/* Quantity Selection Group */
+.quantity-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem auto;
+  max-width: 200px;
+  width: 100%;
+}
+
+/* Label Styling */
+.quantity-group label {
+  font-weight: bold;
+  color: #161616;
+  margin-right: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Select Dropdown */
+.quantity-group select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 100px; /* Limiting max width */
+}
+
+.quantity-group select:focus {
+  border-color: #0077cc;
+  box-shadow: 0 0 5px rgba(0, 119, 204, 0.5);
+  outline: none;
 }
