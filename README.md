@@ -1,7 +1,7 @@
 # Overview
 This is the final project for CSC230 at SFSU.
 
-[Deployment URL](https://reinvented-flicker-twilight.glitch.me/)
+[Deployment URL](https://boom-ludicrous-adjustment.glitch.me/)
 
 ## Getting Started
 ### Installing Dependencies
@@ -39,4 +39,4 @@ GLITCH_GIT_URL # https://boom-ludicrous-adjustment.glitch.me
 * Make sure you are using `development` or `production` as the `ENV` variable in your `.env` file - configuration in `app.js` depends on it
 
 ### TODO
-1. Set `Deployment URL` in README to Glitch dev environment @Ajmalmassoumy
+1.Done.
