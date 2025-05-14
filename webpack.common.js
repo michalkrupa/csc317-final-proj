@@ -6,7 +6,7 @@ module.exports = (env) => {
   const isProd = env.production;
 
   return {
-    entry: "./webpack/index.js",
+    entry: "./webpack/index.js",  // Ensure this is the correct entry point
     output: {
       path: path.resolve(__dirname, "public/dist"),
       publicPath: "/dist/",
@@ -22,7 +22,10 @@ module.exports = (env) => {
         },
         {
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, "css-loader"],
+          use: [
+            isProd ? MiniCssExtractPlugin.loader : "style-loader", // Conditionally use style-loader or MiniCssExtractPlugin
+            "css-loader",
+          ],
         },
       ],
     },
