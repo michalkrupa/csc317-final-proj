@@ -4,12 +4,12 @@ function createProductsRouter(db) {
     const router = express.Router();
 
     router.get('/crystals', (req, res) => {
-        res.render('products/crystals', {title: 'All Crystals'});
-    })
+        res.render('products/crystals', { title: 'All Crystals' });
+    });
 
     router.get('/jewelry', (req, res) => {
-        res.render('products/jewelry', {title: 'All Jewelry'});
-    })
+        res.render('products/jewelry', { title: 'All Jewelry' });
+    });
 
     // Create a new product
     router.post('/', (req, res) => {
@@ -45,7 +45,7 @@ function createProductsRouter(db) {
         });
     });
 
-    // Read: Get single product by id
+    // Read: Get single product by id (FIXED to render the detail view)
     router.get('/:id', (req, res) => {
         const { id } = req.params;
         db.get('SELECT * FROM products WHERE id = ?', [id], (err, row) => {
@@ -57,7 +57,7 @@ function createProductsRouter(db) {
             if (!row) {
                 return res.status(404).send('Product not found');
             }
-            res.render('products/product', {product: row, title: title});
+            res.render('products/detail', { product: row, title: title }); 
         });
     });
 

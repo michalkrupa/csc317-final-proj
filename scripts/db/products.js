@@ -1,24 +1,23 @@
-// products.js
-
 const { execute, query } = require('./sql');
 
 const products = [
-    ["Amethyst Ring", "Elegant purple gemstone ring.", 120.00, "product1.jpeg", false, false],
-    ["Emerald Necklace", "Vibrant green emerald pendant.", 250.00, "product2.jpeg", false, true],
-    ["Ruby Earrings", "Bold ruby gemstone earrings.", 180.00, "product3.jpeg", false, false],
-    ["Sapphire Bracelet", "Blue sapphire stones in silver.", 210.00, "product4.jpeg", true, true],
-    ["Diamond Pendant", "Classic diamond solitaire necklace.", 320.00, "product5.jpeg", false, true],
-    ["Topaz Brooch", "Yellow topaz brooch with vintage design.", 145.00, "product6.jpeg", false, false],
-    ["Opal Ring", "Iridescent opal gemstone ring.", 160.00, "product7.jpeg", false, false],
-    ["Citrine Studs", "Golden citrine stud earrings.", 95.00, "product8.jpeg", true, false],
-    ["Turquoise Cuff", "Bold turquoise in handcrafted cuff.", 190.00, "product9.jpeg", false, false],
-    ["Garnet Chain", "Dark red garnet on gold chain.", 130.00, "product10.jpeg", false, false],
-    ["Moonstone Charm", "Soft glowing moonstone charm.", 110.00, "product11.jpeg", false, false],
-    ["Aquamarine Ring", "Calm blue aquamarine in silver.", 200.00, "product12.jpeg", true, false],
+    ["Emerald Pendant", "A vibrant emerald pendant on a delicate gold chain, blending natural beauty with timeless elegance.", 1220.00, "product1.jpeg", 0, 0],
+    ["Ruby Pendant", "A rich ruby pendant on a fine white gold chain, radiating bold color and classic charm.", 240.00, "product2.jpeg", 0, 1],
+    ["Aquamarine Pendant", "A serene aquamarine pendant on a sleek silver chain, exuding calm and elegance.", 140.00, "product3.jpeg", 0, 0],
+    ["Diamond Ring", "A dazzling 3-carat diamond set in a luxurious 22K gold band, embodying brilliance and opulence.", 5500.00, "product4.jpeg", 0, 1],
+    ["Emerald Pendant", "A striking 6-carat emerald pendant on a polished silver chain, showcasing bold elegance and rich color.", 2240.00, "product5.jpeg", 0, 1],
+    ["Ruby", "A stunning 5-carat cut ruby, radiating deep red brilliance-perfect as a standout centerpiece.", 3540.00, "product6.jpeg", 0, 0],
+    ["Sapphire", "A captivating 6-carat cut sapphire, showcasing deep blue hues and refined brilliance-ideal for a luxurious statement piece.", 10500.00, "product7.jpeg", 0, 0],
+    ["Tanzanite", "Captivating 8-carat round-cut tanzanite, featuring a stunning blue-violet hue and exceptional clarity, perfect for any occasion.", 7500.00, "product8.jpeg", 1, 0],
+    ["Aquamarine", "An exquisite 8-carat cut aquamarine, glowing with serene blue tones and timeless sophistication.", 90500.00, "product9.jpeg", 0, 0],
+    ["Aquamarine Earrings", "Elegant aquamarine earrings, featuring soft blue gemstones that add a touch of calm and refined sparkle.", 5000.00, "product10.jpeg", 0, 0],
+    ["Diamond Earrings", "Diamond earrings with a 22k gold band, radiating timeless elegance and brilliance for any occasion.", 7000.00, "product11.jpeg", 1, 0],
+    ["Diamond Earrings", "Sparkling diamond earrings, radiating timeless elegance and brilliance for any occasion.", 8000.00, "product12.jpeg", 1, 0]
 ];
 
+// Updated function to handle missing is_sale and is_featured
 const addImageToProducts = (productData) => {
-    return productData.map(([name, description, price, image, is_sale, is_featured]) => ({
+    return productData.map(([name, description, price, image, is_sale = 0, is_featured = 0]) => ({
         name,
         description,
         price,
@@ -38,7 +37,8 @@ const createProducts = async (db) => {
                 description TEXT,
                 price REAL NOT NULL DEFAULT 0.0,
                 is_featured INTEGER NOT NULL DEFAULT 0,
-                is_sale INTEGER NOT NULL DEFAULT 0
+                is_sale INTEGER NOT NULL DEFAULT 0,
+                image TEXT
             )`
         );
 

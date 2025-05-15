@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  .product-detail
+    h1= product.name
+    img.product-image(src='/images/#{product.image}', alt='#{product.name} image')
+    p.description= product.description
+    p.price Price: $#{(product.price || 0).toFixed(2)}
+
+    if product.is_featured
+      p.badge Featured Product
+
+    if product.is_sale
+      p.badge(on-sale) On Sale!
+
+    // Add to Cart form
+    form(action='/cart/add', method='POST')
+      input(type='hidden', name='product_id', value=product.id)
+      input(type='hidden', name='product_name', value=product.name)
+      input(type='hidden', name='price_per_unit', value=product.price)
+
+      .quantity-group
+        label(for='quantity') Quantity:
+        select#quantity(name='quantity')
+          each val in [1,2,3,4,5,6,7,8,9,10]
+            option(value=val selected=val==1)= val
+
+      button.add-to-cart-btn Add to Cart
+
+    // Back link
+    a(href="/products") ← Back to All Products
