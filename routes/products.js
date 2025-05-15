@@ -49,6 +49,7 @@ function createProductsRouter(db) {
     router.get('/:id', (req, res) => {
         const { id } = req.params;
         db.get('SELECT * FROM products WHERE id = ?', [id], (err, row) => {
+            const title = `${row.name}`;
             if (err) {
                 console.error(err);
                 return res.status(500).send('Database error fetching product');
@@ -56,7 +57,7 @@ function createProductsRouter(db) {
             if (!row) {
                 return res.status(404).send('Product not found');
             }
-            res.render('products/detail', { product: row }); 
+            res.render('products/detail', { product: row, title: title }); 
         });
     });
 
