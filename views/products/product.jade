@@ -1,8 +1,14 @@
 extends ../layout
 
 block content
-	.product-details
-		h3 #{product.name}
-		img.product-image(src='/images/#{product.image}', alt='#{product.name} image')
-		p #{product.description}
-		p Price: #{product.price}
+	ul.product-grid
+		.product-item
+			a(href=`/products/${product.id}` aria-label=`View details for ${product.name}`)
+				img(src=`/images/${product.image}`, alt=product.name, onerror="this.onerror=null; this.src='https://via.placeholder.com/200x200';")
+				h3= product.name
+				p= product.description
+				span $#{product.price.toFixed(2)}
+				if product.is_sale
+				span.sale-flag On Sale!
+			a(href=`/cart/add/${product.id}`)
+				button.add-to-cart-btn Add to Cart
