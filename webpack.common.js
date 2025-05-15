@@ -4,7 +4,7 @@ const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
 module.exports = (env) => {
   const isProd = env.production;
-
+  console.log('isProd' + isProd);
   return {
     entry: "./webpack/index.js",  // Ensure this is the correct entry point
     output: {
@@ -23,7 +23,7 @@ module.exports = (env) => {
         {
           test: /\.css$/,
           use: [
-            isProd ? MiniCssExtractPlugin.loader : "style-loader", // Conditionally use style-loader or MiniCssExtractPlugin
+            MiniCssExtractPlugin.loader,
             "css-loader",
           ],
         },
