@@ -1,7 +1,7 @@
 # Overview
 This is the final project for CSC230 at SFSU.
 
-[Deployment URL](https://boom-ludicrous-adjustment.glitch.me/)
+[Deployment URL](https://gilded-good-cupboard.glitch.me/)
 
 ## Getting Started
 ### Installing Dependencies
@@ -30,7 +30,8 @@ system before running the project:
 2. Configure the following `secrets` in Github:
 
 ```
-GLITCH_GIT_URL # https://boom-ludicrous-adjustment.glitch.me
+GLITCH_GIT_URL # 
+https://gilded-good-cupboard.glitch.me
 ```
 
 ### Troubleshooting
